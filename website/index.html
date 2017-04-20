@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="shortcut icon" href="assets/dir-to-jsObject.ico" />
+    <script src="libs/angular/angular.js"></script>
+    <script src="assets/unquotedValidator.js"></script>
+    <script src="assets/angular-json-explorer.js"></script>
+		<link rel="stylesheet" type="text/css" media="all" href="assets/angular-json-explorer.css" />
+    <style>
+  	html { margin:0; padding:0; font-size:62.5%; }
+  	body { max-width:800px; min-width:300px; margin:0 auto; padding:20px 10px; font-size:14px; font-size:1.4em; }
+  	.demo { overflow:auto; border:1px solid silver; min-height:100px; }
+    .context-var { display:inline-flex; }
+    .code-var { font-weight:bold; color:purple; }
+  	</style>
+  	<link rel="stylesheet" href="assets/style.css" />
+		<script>
+			angular
+			.module('demo', ['ngJsonExplorer'])
+			.controller('DemoCtrl', ['$scope', function ($scope) {
+				$scope.url = 'dirData.js';
+				$scope.collapsed = true;
+			}]);
+		</script>
+	</head>
+	<body ng-app="demo">
+    <h1>contexter demo App</h1>
+    <blockquote>
+      Reactively extract all available data from files in a directory to one javascript object
+    </blockquote>
+    <img src="assets/dir-with-images-to-jsObject-240x135.png" alt="dir-with-images-to-jsObject-240x135" style="max-width:100%;">
+    <h2>This directory...</h2>
+  	<div id="dir" class="demo"></div>
+
+  	<script src="assets/jquery.min.js"></script>
+  	<script src="assets/jstree.js"></script>
+
+    <h2>... produces this context object</h2>
+    <div class="context-var demo">
+      <span><span class="code-var">var</span>&nbsp;context&nbsp;=&nbsp;</span>
+  		<span ng-controller="DemoCtrl">
+  			<json-explorer url="url"></json-explorer>
+  		</span>
+    </div>
+    <p><strong>...reactively</strong>. Try updating anything in the directory while the App is running</p>
+    <p><small>Extra: Navigate into the object and hover the colored final value.
+      Tooltip will show the object's reference notation to the value</small></p>
+    <h2>Description</h2>
+    <p><code>contexter</code> only handles datafiles (extensions <code>.json .yml .yaml</code>) but could be easily extended by plugins</p>
+    <p>This App is an example that adds <strong>images</strong> file type and plugin to extract <strong>image metadata</strong> without keeping the image in the <code>context</code> object</p>
+	</body>
+</html>

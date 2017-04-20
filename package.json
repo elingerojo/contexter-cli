@@ -1,8 +1,7 @@
 {
   "name": "contexter-cli",
   "version": "0.1.1",
-  "description": "CLI to reactively extract all available data from files in a directory to one javascript object",
-  "main": "lib/contexter/index.js",
+  "description": "CLI demo application to reactively extract all available data from files (including images) in a directory to one javascript object",
   "bin": "cli.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --check-leaks"
@@ -26,7 +25,7 @@
     "chalk": "^1.1.1",
     "chokidar": "^1.4.1",
     "connect-browser-sync": "^2.0.1",
-    "contexter": "^0.1.0",
+    "contexter": "^0.1.1",
     "cors": "^2.7.1",
     "event-emitter": "^0.3.4",
     "exif-parser": "^0.1.9",
