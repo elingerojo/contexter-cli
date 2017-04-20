@@ -96,12 +96,14 @@ The result is a reactive `context` variable equivalent to:
 
 1) Install with npm:
 
-    npm install contexter-cli --global
+```
+$ npm install contexter-cli --global
+```
 
 2) Then run the command `serve` with a path to the directory
 
 ```
-contexter-cli serve <path-to-dir>
+$ contexter-cli serve <path-to-dir>
 ```
 3) Wait for the following output
 
