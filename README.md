@@ -6,7 +6,7 @@ This is a complete application to show the core [contexter](https://www.npmjs.co
 
 Reactively extract all available data from files (including images) in a directory to one javascript object
 
-![dir-with-images-to-jsObject-240x135](website/assets/dir-with-images-to-jsObject-240x135.png)
+![dir-with-images-to-jsObject-240x135](https://cloud.githubusercontent.com/assets/4935817/25252880/46b69f52-25e4-11e7-9c10-8bcb64238c0c.png)
 
 
 `contexter-cli` has two commands, `serve` and `write`. Both accept a directory path
@@ -58,7 +58,7 @@ Open browser to http://localhost:3000
 
 You will see the directory structure and a dynamic `context` javascript object that mirrors it
 
-![homepage.png](website/assets/homepage.png)
+![homepage.png](https://cloud.githubusercontent.com/assets/4935817/25252888/50952da4-25e4-11e7-9ce8-04b47d64f6bf.png)
 
 The result is a reactive `context` variable equivalent to:
 
