@@ -6,11 +6,11 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --check-leaks"
   },
-  "repository": "github:elingerojo/contexter",
+  "repository": "github:elingerojo/contexter-cli",
   "author": "elingerojo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/elingerojo/contexter/issues"
+    "url": "https://github.com/elingerojo/contexter-cli/issues"
   },
   "devDependencies": {
     "chai": "^3.4.1",

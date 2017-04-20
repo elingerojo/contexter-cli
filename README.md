@@ -94,18 +94,18 @@ The result is a reactive `context` variable equivalent to:
 
 ## Getting started
 
-1) Install with npm:
+1.- Install with npm:
 
 ```
 $ npm install contexter-cli --global
 ```
 
-2) Then run the command `serve` with a path to the directory
+2.- Then run the command `serve` with a path to the directory
 
 ```
 $ contexter-cli serve <path-to-dir>
 ```
-3) Wait for the following output
+3.- Wait for the following output
 
 ```
 ...
@@ -123,9 +123,9 @@ The server now is running at http://localhost:3000
 
 ```
 
-4) In a browser open http://localhost:3000
+4.- In a browser open http://localhost:3000
 
-5) Play with the dynamic `context` javascript object
+5.- Play with the dynamic `context` javascript object
 
 ...it is reactive, you can update files while the App is running to see the changes in the browser live!
 
