@@ -1,0 +1,51 @@
+{
+  "name": "contexter-cli",
+  "version": "0.1.1",
+  "description": "CLI to reactively extract all available data from files in a directory to one javascript object",
+  "main": "lib/contexter/index.js",
+  "bin": "cli.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test mocha --check-leaks"
+  },
+  "repository": "github:elingerojo/contexter",
+  "author": "elingerojo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elingerojo/contexter/issues"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "cross-env": "^2.0.0",
+    "mocha": "^2.3.3",
+    "nixt": "^0.4.1",
+    "path-exists": "^2.1.0",
+    "supertest": "^1.1.0"
+  },
+  "dependencies": {
+    "browser-sync": "^2.11.1",
+    "chalk": "^1.1.1",
+    "chokidar": "^1.4.1",
+    "connect-browser-sync": "^2.0.1",
+    "contexter": "^0.1.0",
+    "cors": "^2.7.1",
+    "event-emitter": "^0.3.4",
+    "exif-parser": "^0.1.9",
+    "express": "^4.13.3",
+    "fs-extra": "^0.26.3",
+    "get-image-colors": "^1.5.0",
+    "image-size": "^0.5.0",
+    "inflection": "^1.8.0",
+    "js-yaml": "^3.4.6",
+    "lil-env-thing": "^1.0.0",
+    "lodash": "^4.0.0",
+    "minimist": "^1.2.0",
+    "morgan": "^1.6.1",
+    "open": "0.0.5",
+    "require-dir": "^0.3.0",
+    "tmp": "0.0.28",
+    "upath": "^0.2.0"
+  },
+  "engines": {
+    "node": ">=4"
+  }
+}
