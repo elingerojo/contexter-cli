@@ -16,7 +16,7 @@ if (!command) usage()
 if (args._[1]) var sourceDir = path.resolve(process.cwd(), args._[1])
 if (args._[2]) var targetFile = path.resolve(process.cwd(), args._[2])
 process.env.CONTEXTER_PORT = args.port || args.p || 3000
-process.env.CONTEXTER_BASEDIR = args.basedir || args.b || '/'
+process.env.CONTEXTER_IGNORES = args.ingores || args.i || './ignores'
 
 switch(command) {
   case 'sers':
@@ -34,7 +34,7 @@ switch(command) {
     break
   case 'help':
   case 'docs':
-    open('https://www.npmjs.com/package/contexter')
+    open('https://www.npmjs.com/package/contexter-cli')
     break
   default:
     console.log(`Unrecognized command: ${command}\n`)
