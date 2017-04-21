@@ -10,7 +10,6 @@ const they      = it
 const test      = it
 
 const sourceDir = path.join(__dirname, 'fixtures')
-const targetDir = path.normalize(tmp.dirSync().name)
 var context
 
 describe('app', function () {
@@ -23,7 +22,7 @@ describe('app', function () {
   it("emits a series of lifecycle events, ultimately emitting a squeezed context object", function (done) {
     var events = []
 
-    app(sourceDir, targetDir)
+    app(sourceDir)
       .on('started', () => events.push('started'))
       .on('squeezing', () => events.push('squeezing'))
       .on('squeezed', (_context) => {
@@ -90,13 +89,19 @@ describe('app', function () {
     they('include zip files', function(){
       expect(filenames).to.contain('/archive.zip')
     })
+
+    they('include font files with extension like images (.svg)', function(){
+      expect(filenames).to.contain('/fonts/glyphicons-halflings-regular.svg')
+    })
   })
 
   describe('images', function(){
     var images
+    var filenames
 
     before(function(){
       images = context.images
+      filenames = images.map(f => f.path.relative)
     })
 
     they('include width and height dimensions', function() {
@@ -115,6 +120,10 @@ describe('app', function () {
       var colors = images['/thumbs/gif/thumb.gif'].colors
       expect(colors).to.be.an('array')
       expect(colors[0]).to.match(/^#[0-9a-f]{3,6}$/i)
+    })
+
+    they('do not include font files with extension like images (.svg)', function(){
+      expect(filenames).to.not.contain('/fonts/glyphicons-halflings-regular.svg')
     })
   })
 
