@@ -15,6 +15,8 @@ var context
 describe('app', function () {
   this.timeout(10000)
 
+  process.env.CONTEXTER_IGNORES = 'node_modules'
+
   it('is a function', function () {
     expect(app).to.be.a('function')
   })
@@ -82,12 +84,12 @@ describe('app', function () {
       filenames = unknowns.map(f => f.path.relative)
     })
 
-    they('include extensionless files like CNAME', function(){
-      expect(filenames).to.contain('/CNAME')
+    they('do NOT include extensionless files like CNAME', function(){
+      expect(filenames).to.not.contain('/CNAME')
     })
 
-    they('include zip files', function(){
-      expect(filenames).to.contain('/archive.zip')
+    they('do NOT include zip files', function(){
+      expect(filenames).to.not.contain('/archive.zip')
     })
 
     they('include font files with extension like images (.svg)', function(){

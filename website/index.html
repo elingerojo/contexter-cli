@@ -9,6 +9,16 @@
     <style>
   	html { margin:0; padding:0; font-size:62.5%; }
   	body { max-width:800px; min-width:300px; margin:0 auto; padding:20px 10px; font-size:14px; font-size:1.4em; }
+    pre, code{
+      color: #000;
+      font-family:Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-size: 0.94em; /* 0.94 = 0.88 + (1.00 - 0.88) / 2 */
+      border-radius:3px;
+      background-color: #F8F8F8;
+      border: 1px solid #CCC;
+    }
+    pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; padding: 5px;}
+    pre code { border: 0px !important; background: transparent !important; line-height: 1.3em; }
   	.demo { overflow:auto; border:1px solid silver; min-height:100px; }
     .context-var { display:inline-flex; }
     .code-var { font-weight:bold; color:purple; }
@@ -29,7 +39,7 @@
       Reactively extract all available data from files in a directory to one javascript object
     </blockquote>
     <img src="assets/dir-with-images-to-jsObject-240x135.png" alt="dir-with-images-to-jsObject-240x135" style="max-width:100%;">
-    <h2>This directory...</h2>
+    <h2>_dirMessage-placeholder_</h2>
   	<div id="dir" class="demo"></div>
 
   	<script src="assets/jquery.min.js"></script>
@@ -45,8 +55,55 @@
     <p><strong>...reactively</strong>. Try updating anything in the directory while the App is running</p>
     <p><small>Extra: Navigate into the object and hover the colored final value.
       Tooltip will show the object's reference notation to the value</small></p>
-    <h2>Description</h2>
-    <p><code>contexter</code> only handles datafiles (extensions <code>.json .yml .yaml</code>) but could be easily extended by plugins</p>
-    <p>This App is an example that adds <strong>images</strong> file type and plugin to extract <strong>image metadata</strong> without keeping the image in the <code>context</code> object</p>
-	</body>
+    <div id="out"><h2>contexter-cli sample application</h2>
+    <p>This application is a "<a href="https://www.npmjs.com/package/contexter">context library</a> use example" that extends the library to add images <code>filetype</code> and corresponding <code>plugin</code> to extract <strong>image metadata</strong> without keeping the images themselves in the <code>context</code> object (just their metadata)</p>
+    <p>CLI commands:</p>
+    <ul>
+    <li><code>serve &lt;source-dir&gt; --all --ignore &lt;ignored-directory&gt;</code></li>
+    <li><code>write &lt;source-dir&gt; &lt;path-to-file&gt; --all --ignore &lt;ignored-directory&gt;</code></li>
+    </ul>
+    <p>arguments:</p>
+    <ul>
+    <li>&lt;source-dir&gt;: Path to directory to be "contexted"</li>
+    <li>&lt;path-to-file&gt;: Path to file to write <code>context</code> object as JSON (if not present, default to <code>stdout</code> (console terminal)</li>
+    <li><code>--all</code> or <code>-a</code>: Watch for all files in &lt;source-dir&gt; (if not present, default to watch ONLY <code>datafiles</code> and <code>images</code>)</li>
+    <li><code>--ignore &lt;ignored-directory&gt;</code> or <code>-i &lt;ignored-directory&gt;</code>: Ignores &lt;ignored-directory&gt; (if not present, default to <code>node_modules</code> directory)</li>
+    </ul>
+    <h4>examples</h4>
+    <p>Watch ONLY <code>datafiles</code> and <code>images</code> in current directory</p>
+    <pre><code>$ contexter-cli serve .
+    </code></pre>
+    <hr>
+    <p>Watch ALL files in current directory</p>
+    <pre><code>$ contexter-cli serve . --all
+    </code></pre>
+    <hr>
+    <p>Watch ALL files in current directory but ingnore <code>assets</code> directory (instead of default <code>node_modules</code>)</p>
+    <pre><code>$ contexter-cli serve . --all --ignore ./assets
+    </code></pre>
+    <hr>
+    <p>Watch ONLY <code>datafiles</code> and <code>images</code> in <code>../myProject/src</code> directory</p>
+    <pre><code>$ contexter-cli serve ../myProject/src
+    </code></pre>
+    <hr>
+    <p>Write <code>context</code> object for ONLY <code>datafiles</code> and <code>images</code> in current directory to file <code>../extracted.json</code></p>
+    <pre><code>$ contexter-cli write . ../extracted.json
+    </code></pre>
+    <hr>
+    <h2>Bugs or Errors</h2>
+    <p>Report bugs or errors <a href="https://github.com/elingerojo/contexter-cli/issues">creating a new issue</a> (if it is not already reported/answered)</p>
+    <p>Include:</p>
+    <ol>
+    <li>copy/paste of the problem</li>
+    <li>node version</li>
+    </ol>
+    <h4>How to know your node version?</h4>
+    <p>Sample</p>
+    <pre><code>$ node -v
+v6.9.2
+    </code></pre>
+    <hr>
+    <p><small>Copyright (c) 2017 Eduardo Martinez - MIT License</small></p>
+    </div>
+    </body>
 </html>

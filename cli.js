@@ -16,7 +16,8 @@ if (!command) usage()
 if (args._[1]) var sourceDir = path.resolve(process.cwd(), args._[1])
 if (args._[2]) var targetFile = path.resolve(process.cwd(), args._[2])
 process.env.CONTEXTER_PORT = args.port || args.p || 3000
-process.env.CONTEXTER_IGNORES = args.ingores || args.i || './ignores'
+process.env.CONTEXTER_IGNORES = args.ignore || args.i || './node_modules'
+if (args.all || args.a) process.env.CONTEXTER_WATCH_ALL = true
 
 switch(command) {
   case 'sers':
@@ -44,12 +45,14 @@ switch(command) {
 function usage() {
   console.log(
 `
-  contexter serve                             Serve the current directory
-  contexter serve <source-dir>                Serve a specific directory
-  contexter serve <source-dir> --port 1337    Use a custom port. Default is 3000
-  contexter write <source-dir> <target-file>  Write source directory to file
-  contexter write <source-dir>                Write source directory to stdout
-  contexter help                              Open npm README in your browser
+  contexter serve                                       Serve the current directory
+  contexter serve <source-dir>                          Serve a specific directory
+  contexter serve <source-dir> --port 1337              Use a custom port. Default is 3000
+  contexter serve <source-dir> --all                    Serve all files (even those not datafile nor image)
+  contexter serve <source-dir> --ignore <ignore-dir>    Default is 'node_modules'
+  contexter write <source-dir> <target-file>            Write source directory to file
+  contexter write <source-dir>                          Write source directory to stdout
+  contexter help                                        Open npm README in your browser
 `)
 
   console.log(chalk.dim(`  version ${pkg.version}`))

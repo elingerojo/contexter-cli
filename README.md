@@ -1,3 +1,5 @@
+[![travis-badge](https://travis-ci.org/elingerojo/contexter-cli.svg?branch=master)](https://travis-ci.org/elingerojo/contexter-cli)
+
 # contexter-cli
 
 > A demo application that extends the `npm contexter` **metadata** extraction capability to images also
@@ -11,8 +13,8 @@ Reactively extract all available data from files (including images) in a directo
 
 `contexter-cli` has two commands, `serve` and `write`. Both accept a directory path
 
-- `serve` shows the `context` object generated
-- `write` writes to a file or console the `context` object generated
+- `serve` shows the `context` object generated in a browser window
+- `write` writes the `context` object generated to a file or console
 
 ## Usage
 
@@ -36,12 +38,8 @@ $ contexter-cli serve .
 **terminal output**
 ```
 Started contexting dir...
-  /README.md added
-  /index.html added
-  /notes.txt added
   /assets/photo.jpg added
   /assets/posts.yml added
-  /assets/style.css added
 .done!
 The server now is running at http://localhost:3000
 
@@ -58,7 +56,7 @@ Open browser to http://localhost:3000
 
 You will see the directory structure and a dynamic `context` javascript object that mirrors it
 
-![homepage.png](https://cloud.githubusercontent.com/assets/4935817/25252888/50952da4-25e4-11e7-9ce8-04b47d64f6bf.png)
+![homepage.png](https://cloud.githubusercontent.com/assets/4935817/25316802/a69c2f2c-2832-11e7-9228-241e1c55cf8b.png)
 
 The result is a reactive `context` variable equivalent to:
 
@@ -72,24 +70,18 @@ The result is a reactive `context` variable equivalent to:
                                             "#5c5c5c",
                                             "#787878",
                                             "#646464"
-                                      ], ...
+                                            ], ...
                                 },
-                              "style.css": {...},
-                              "posts.yml": {...},
-                        "index.html":  {...},
-                        "README.md":  {...},
-                        "notes.txt":  {...}
+                              "posts.yml": {...}
                         },
                   datafiles: [
-                        {...}   // index.html
+                        {...}   // posts.yml
+                        ],
+                  images: [
+                        {...}   // photo.jpg
                         ],
                   unknowns: [
-                        {...},  // photo.jpg
-                        {...},  // style.css
-                        {...},  // index.html
-                        {...},  // README.md
-                        {...}   // notes.txt
-                        ]
+                        ]       // empty
                 }
 
 ## Getting started
