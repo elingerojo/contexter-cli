@@ -21,10 +21,7 @@
     "supertest": "^1.1.0"
   },
   "dependencies": {
-    "browser-sync": "^2.11.1",
     "chalk": "^1.1.1",
-    "chokidar": "^1.4.1",
-    "connect-browser-sync": "^2.0.1",
     "contexter": "^0.3.0",
     "cors": "^2.7.1",
     "event-emitter": "^0.3.4",
