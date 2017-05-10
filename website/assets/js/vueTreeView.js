@@ -13,6 +13,7 @@ Vue.component("console-view", Vue.extend({
 
   template:`
   <div class="console-view">
+  <div class="console-view-comment">// Click any property above to open until you hit an "end leaf"</div>
   <span><span class="code-var">console.log</span>(&nbsp;</span><span class="console-view-wrapper"><span class="console-view-input" :data="content">{{content.input}}</span></span><span>&nbsp;);</span><br>
   <span>&gt;&nbsp;{{content.output}}</span>
   </div>
@@ -98,7 +99,7 @@ Vue.component("tree-view-item", Vue.extend({
 				<tree-view-item :max-depth="maxDepth" :current-depth="currentDepth+1" :focus-node="focusNode" v-show="isOpen()" v-for="child in data.children" :data="child" :key="data.key"></tree-view-item>
       </div>
     	<div class="tree-view-item-leaf" v-if="isValue(data)">
-        <span class="tree-view-item-key">{{getKey(data)}}</span>
+        <span class="tree-view-item-key" :title="data.breadcrums" :output="data.value.toString()" onclick="sendToConsole( this.getAttribute('title'), this.getAttribute('output') )">{{getKey(data)}}</span>
         <span class="tree-view-item-value" :title="data.breadcrums" :output="data.value.toString()" onclick="sendToConsole( this.getAttribute('title'), this.getAttribute('output') )">{{getValue(data)}}</span>
 			</div>
     </div>
@@ -230,7 +231,7 @@ var vm = new Vue({
       dirData: null,
       focusPath: '',
       consoleData: {
-        input: '<click a data leaf>',
+        input: '',
         output: ''
       }
     }

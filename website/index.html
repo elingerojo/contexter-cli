@@ -29,9 +29,9 @@
     <link rel="stylesheet" href="assets/css/vueTreeView.css" />
 	</head>
 	<body ng-app="demo">
-    <h1>contexter-cli is the contexter demo</h1>
+    <h1>contexter-cli</h1>
     <blockquote>
-      CLI demo application to reactively extract all available data from files (including images) in a directory to one javascript object
+      CLI demo application using <code>npm contexter</code> to reactively extract all available data from files (including images) in a directory to one javascript object
     </blockquote>
     <img src="assets/images/dir-with-images-to-jsObject-240x135.png" alt="dir-with-images-to-jsObject-240x135" style="max-width:100%;">
 
@@ -68,7 +68,7 @@
     <li>&lt;source-dir&gt;: Path to directory to be "contexted"</li>
     <li>&lt;path-to-file&gt;: Path to file to write <code>context</code> object as JSON (if not present, default to <code>stdout</code> (console terminal)</li>
     <li><code>--all</code> or <code>-a</code>: Watch for all files in &lt;source-dir&gt; (if not present, default to watch ONLY <code>datafiles</code> and <code>images</code>)</li>
-    <li><code>--ignore &lt;ignored-directory&gt;</code> or <code>-i &lt;ignored-directory&gt;</code>: Ignores &lt;ignored-directory&gt; (if not present, default to <code>node_modules</code> directory)</li>
+    <li><code>--ignore &lt;ignored-directory&gt;</code> or <code>-i &lt;ignored-directory&gt;</code>: Ignores &lt;ignored-directory&gt; (if not present, defaults to ignore <code>node_modules</code> directory)</li>
     </ul>
     <br>
     <h4>examples</h4>

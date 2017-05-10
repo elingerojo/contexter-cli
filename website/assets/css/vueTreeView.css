@@ -72,3 +72,7 @@
 .console-view-input {
   font-weight: bold;
 }
+
+.console-view-comment {
+  color: #888
+}
