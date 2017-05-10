@@ -2,7 +2,6 @@
 
 const path      = require('upath')
 const expect    = require('chai').expect
-const tmp       = require('tmp')
 const uniq      = require('lodash').uniq
 const exists    = require('path-exists').sync
 const app       = require('../lib/app')
