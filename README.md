@@ -56,7 +56,7 @@ Open browser to http://localhost:3000
 
 You will see the directory structure and a dynamic `context` javascript object that mirrors it
 
-![homepage.png](https://cloud.githubusercontent.com/assets/4935817/25316802/a69c2f2c-2832-11e7-9228-241e1c55cf8b.png)
+![homepage.png](https://cloud.githubusercontent.com/assets/4935817/25930812/00b77f72-35ce-11e7-996d-d653329ab50c.png)
 
 The result is a reactive `context` variable equivalent to:
 
@@ -123,7 +123,7 @@ The server now is running at http://localhost:3000
 
 ## Acknowledgements
 
-- [@zeke](https://www.npmjs.com/~zeke) Thanks for your code, time and inspiration
+- [@zeke](https://www.npmjs.com/~zeke) Thanks for your ideas, code and time
 
 ## License
 
