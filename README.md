@@ -32,11 +32,13 @@ Sample dir structure
 
 **CLI**
 
+```sh
+contexter-cli serve .
 ```
-$ contexter-cli serve .
-```
+
 **terminal output**
-```
+
+```js
 Started contexting dir...
   /assets/photo.jpg added
   /assets/posts.yml added
@@ -52,54 +54,58 @@ The server now is running at http://localhost:3000
 [BS] Watching files...
 
 ```
+
 Open browser to http://localhost:3000
 
-You will see the directory structure and a dynamic `context` javascript object that mirrors it
+You will see the directory structure and a dynamic `context` JavaScript object that mirrors it
 
 ![homepage.png](https://cloud.githubusercontent.com/assets/4935817/25930812/00b77f72-35ce-11e7-996d-d653329ab50c.png)
 
 The result is a reactive `context` variable equivalent to:
 
-    var context = {
-                  "/": {
-                        assets: {
-                              "photo.jpg": {
-                                      colors: [
-                                            "#bbbbbb",
-                                            "#080808",
-                                            "#5c5c5c",
-                                            "#787878",
-                                            "#646464"
-                                            ], ...
-                                },
-                              "posts.yml": {...}
-                        },
-                  datafiles: [
-                        {...}   // posts.yml
-                        ],
-                  images: [
-                        {...}   // photo.jpg
-                        ],
-                  unknowns: [
-                        ]       // empty
-                }
+```js
+var context = {
+              dir: {
+                    assets: {
+                          "photo.jpg": {
+                                  colors: [
+                                        "#bbbbbb",
+                                        "#080808",
+                                        "#5c5c5c",
+                                        "#787878",
+                                        "#646464"
+                                        ], ...
+                            },
+                          "posts.yml": {...}
+                    },
+              datafiles: [
+                    {...}   // posts.yml
+                    ],
+              images: [
+                    {...}   // photo.jpg
+                    ],
+              unknowns: [
+                    ]       // empty
+            }
+```
+
 
 ## Getting started
 
 1.- Install with npm:
 
-```
-$ npm install contexter-cli --global
+```sh
+npm install contexter-cli --global
 ```
 
 2.- Then run the command `serve` with a path to the directory
 
-```
-$ contexter-cli serve <path-to-dir>
+```sh
+contexter-cli serve <path-to-dir>
 ```
 3.- Wait for the following output
 
-```
+```js
 ...
 .done!
 The server now is running at http://localhost:3000
@@ -112,12 +118,11 @@ The server now is running at http://localhost:3000
  -------------------------------------
 [BS] Watching files...
 
-
 ```
 
 4.- In a browser open http://localhost:3000
 
-5.- Play with the dynamic `context` javascript object
+5.- Play with the dynamic `context` JavaScript object
 
 ...it is reactive, you can update files while the App is running to see the changes in the browser live!
 
