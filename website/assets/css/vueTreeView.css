@@ -33,6 +33,12 @@
   white-space: nowrap;
 }
 
+.tree-view-item-leaf .redFlagged {
+  background-color: rgba(202, 18, 18, 0.9);
+  color: #ddd;
+  font-weight: bold;
+}
+
 .tree-view-item-key {
   font-weight: bold;
 }
@@ -75,4 +81,10 @@
 
 .console-view-comment {
   color: #888
+}
+
+.console-view .redFlagged {
+  background-color: rgba(202, 18, 18, 0.9);
+  color: #ddd;
+  font-weight: bold;
 }

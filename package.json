@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "chalk": "^1.1.1",
-    "contexter": "^1.0.0",
+    "contexter": "^1.0.1",
     "cors": "^2.7.1",
     "event-emitter": "^0.3.4",
     "exif-parser": "^0.1.9",

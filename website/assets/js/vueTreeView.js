@@ -4,6 +4,20 @@ Vue.component("console-view", Vue.extend({
 	name: "console-view",
   props: ["data"],
   methods: {
+    isError: function(value){
+      // Set error ONLY when `value.output` starts with any of the ...
+      // ... error strings in the array
+      // ( must match `tree-view` method `transformValue()` error handling ...
+      // ... message + 1 because once converted to string it starts and ends ...
+      // ... with double-quote characters like `"SyntaxError: ..."` )
+      return (typeof
+        // `find` return a string or `undefined` so, if not `undefined` ...
+        // ... means, string found (that means, it is an error)
+        ['SyntaxError', 'YAMLException'].find(errorText => {
+          return value.output.indexOf(errorText) === 1
+        })
+        != 'undefined')
+    }
   },
   computed: {
     content: function () {
@@ -15,7 +29,7 @@ Vue.component("console-view", Vue.extend({
   <div class="console-view">
   <div class="console-view-comment">// Click any property above to open until you hit an "end leaf"</div>
   <span><span class="code-var">console.log</span>(&nbsp;</span><span class="console-view-wrapper"><span class="console-view-input" :data="content">{{content.input}}</span></span><span>&nbsp;);</span><br>
-  <span>&gt;&nbsp;{{content.output}}</span>
+  <span>&gt;&nbsp;<span :class="{redFlagged: isError(content)}">{{content.output}}</span></span>
   </div>
   `
 }));
@@ -64,6 +78,9 @@ Vue.component("tree-view-item", Vue.extend({
     },
     isRootObject: function(value){
     	return value.isRoot;
+    },
+    isError: function(value){
+    	return value.isError;
     }
   },
   // TODO: Change logic to detect click on directory
@@ -85,22 +102,22 @@ Vue.component("tree-view-item", Vue.extend({
     	<div v-if="isObject(data)" class="tree-view-item-leaf">
       	<div class="tree-view-item-node" @click.stop="toggleOpen()">
        		<span :class="{opened: isOpen()}" v-if="!isRootObject(data)" class="tree-view-item-key tree-view-item-key-with-chevron">{{getKey(data)}}</span>
-          <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} property</span>
-          <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} properties</span>
+          <span :class="{redFlagged: isError(data)}" class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} property</span>
+          <span :class="{redFlagged: isError(data)}" class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} properties</span>
         </div>
 				<tree-view-item :max-depth="maxDepth" :current-depth="currentDepth+1" :focus-node="focusNode" v-show="isOpen()" v-for="child in data.children" :data="child" :key="data.key"></tree-view-item>
       </div>
     	<div v-if="isArray(data)" class="tree-view-item-leaf">
       	<div class="tree-view-item-node" @click.stop="toggleOpen()">
        		<span :class="{opened: isOpen()}" v-if="!isRootObject(data)" class="tree-view-item-key tree-view-item-key-with-chevron">{{getKey(data)}}</span>
-          <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} item</span>
-          <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} items</span>
+          <span :class="{redFlagged: isError(data)}" class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} item</span>
+          <span :class="{redFlagged: isError(data)}" class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} items</span>
         </div>
 				<tree-view-item :max-depth="maxDepth" :current-depth="currentDepth+1" :focus-node="focusNode" v-show="isOpen()" v-for="child in data.children" :data="child" :key="data.key"></tree-view-item>
       </div>
-    	<div class="tree-view-item-leaf" v-if="isValue(data)">
+    	<div v-if="isValue(data)" class="tree-view-item-leaf">
         <span class="tree-view-item-key" :title="data.breadcrums" :output="data.value.toString()" onclick="sendToConsole( this.getAttribute('title'), this.getAttribute('output') )">{{getKey(data)}}</span>
-        <span class="tree-view-item-value" :title="data.breadcrums" :output="data.value.toString()" onclick="sendToConsole( this.getAttribute('title'), this.getAttribute('output') )">{{getValue(data)}}</span>
+        <span :class="{redFlagged: isError(data)}" class="tree-view-item-value" :title="data.breadcrums" :output="data.value.toString()" onclick="sendToConsole( this.getAttribute('title'), this.getAttribute('output') )">{{getValue(data)}}</span>
 			</div>
     </div>
   `
@@ -155,32 +172,55 @@ Vue.component("tree-view", Vue.extend({
          }
        }) ;
     },
-  	// Transformer for the non-Collection types,
+    // Transformer for the Object type
+  	transformObject: function(objectToTransform, keyForObject, breadcrums, path, isRootObject = false){
+      let objectNode  = {
+                        	key: keyForObject,
+                        	type: "object",
+                          isRoot: isRootObject,
+                          name: path + '/' + keyForObject,
+                          children: this.generateChildrenFromCollection(
+                                      objectToTransform,
+                                      this.resolveNotation(breadcrums, keyForObject),
+                                      path + '/' + keyForObject
+                                    )
+                        }
+      objectNode.isError = objectNode.children.find(child => child.isError)
+                              && !isRootObject
+      return objectNode
+    },
+  	// Transformer for the Array type
+    transformArray: function (arrayToTransform, keyForArray, breadcrums, path) {
+      let arrayNode = {
+                      	key: keyForArray,
+                        type: "array",
+                        children: this.generateChildrenFromCollection(
+                                    arrayToTransform,
+                                    this.resolveNotation(breadcrums, keyForArray),
+                                    path + '/' + keyForArray
+                                  )
+                      }
+      arrayNode.isError = arrayNode.children.find(child => child.isError)
+      return arrayNode
+    },
+    // Transformer for the non-Collection types,
     // like String, Integer of Float
     transformValue: function (valueToTransform, keyForValue, breadcrums) {
     	return {
       	key: keyForValue,
         type: "value",
         value: valueToTransform,
-        breadcrums: this.resolveNotation(breadcrums, keyForValue)
-      }
-    },
-  	// Transformer for the Array type
-    transformArray: function (arrayToTransform, keyForArray, breadcrums, path) {
-    	return {
-      	key: keyForArray,
-        type: "array",
-        children: this.generateChildrenFromCollection(arrayToTransform, this.resolveNotation(breadcrums, keyForArray), path + '/' + keyForArray)
-      }
-    },
-    // Transformer for the Object type
-  	transformObject: function(objectToTransform, keyForObject, breadcrums, path, isRootObject = false){
-      return {
-      	key: keyForObject,
-      	type: "object",
-        isRoot: isRootObject,
-        name: path + '/' + keyForObject,
-        children: this.generateChildrenFromCollection(objectToTransform, this.resolveNotation(breadcrums, keyForObject), path + '/' + keyForObject)
+        breadcrums: this.resolveNotation(breadcrums, keyForValue),
+        // Set error ONLY when `valueToTransform` starts with any of the ...
+        // ... error strings in the array
+        // (must match `parseCallback()` error handling message)
+        isError: (typeof
+          // `find` return a string or `undefined` so, if not `undefined` ...
+          // ... means, string found (that means, it is an error)
+          ['SyntaxError', 'YAMLException'].find(errorText => {
+            return valueToTransform.toString().indexOf(errorText) === 0
+          })
+          != 'undefined')
       }
     },
     // Helper Methods for value type detection
