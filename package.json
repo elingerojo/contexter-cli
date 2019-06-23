@@ -1,6 +1,6 @@
 {
   "name": "contexter-cli",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "CLI demo application to reactively extract all available data from files (including images) in a directory to one javascript object",
   "bin": "cli.js",
   "scripts": {
@@ -36,8 +36,8 @@
     "lodash": "^4.0.0",
     "minimist": "^1.2.0",
     "morgan": "^1.6.1",
-    "open": "0.0.5",
-    "require-dir": "^0.3.0",
+    "open": "^6.3.0",
+    "require-dir": "^1.2.0",
     "upath": "^0.2.0"
   },
   "engines": {
