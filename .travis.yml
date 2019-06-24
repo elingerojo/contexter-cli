@@ -10,4 +10,4 @@ addons:
     packages:
       - g++-4.8
 before_install:
-  - npm i -g npm@5.8
+  - npm i -g npm@5.6
